@@ -20,17 +20,20 @@ struct ContentView: View {
     @State private var viewColor = Color.yellow
     
     var body: some View {
-        VStack {
-            Image(uiImage: <#T##UIImage#>)
-                .frame(width: 250, height: 150)
-                .background(viewColor)
-            SliderView(value: $redSliderValue, text: $redTextField, color: .red)
-            SliderView(value: $greenSliderValue, text: $greenTextField, color: .green)
-            SliderView(value: $blueSliderValue, text: $blueTextField, color: .blue)
-            
-            Spacer()
+        ZStack {
+            Color.gray
+                .ignoresSafeArea()
+            VStack {
+                Color.brown.frame(width: 250, height: 150)
+                    .overlay(Rectangle().stroke(.white, lineWidth: 3))
+                SliderView(value: $redSliderValue, text: $redTextField, color: .red)
+                SliderView(value: $greenSliderValue, text: $greenTextField, color: .green)
+                SliderView(value: $blueSliderValue, text: $blueTextField, color: .blue)
+                
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
@@ -55,5 +58,15 @@ struct SliderView: View {
                 .frame(width: 45)
                 .textFieldStyle(.roundedBorder)
         }
+    }
+}
+
+extension Color {
+    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var o: CGFloat = 1
+        return (r, g, b, o)
     }
 }
