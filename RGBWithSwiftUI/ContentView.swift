@@ -17,23 +17,31 @@ struct ContentView: View {
     @State private var blueSliderValue = Double.random(in: 0...255)
     @State private var blueTextField = ""
     
-    @State private var viewColor = Color.yellow
+    //@State private var viewColor = Color.red
+    
+    @State private var alertPresenter = false
     
     var body: some View {
         ZStack {
             Color.gray
                 .ignoresSafeArea()
-            VStack {
-                Color.brown.frame(width: 250, height: 150)
-                    .overlay(Rectangle().stroke(.white, lineWidth: 3))
+            VStack(spacing: 30) {
+                Rectangle()
+                    .foregroundColor(Color(red: (redSliderValue / 255), green: greenSliderValue / 255, blue: blueSliderValue / 255, opacity: 1))
+                    .frame(width: 250, height: 150)
+                    .overlay(Rectangle().stroke(.red, lineWidth: 3))
                 SliderView(value: $redSliderValue, text: $redTextField, color: .red)
                 SliderView(value: $greenSliderValue, text: $greenTextField, color: .green)
                 SliderView(value: $blueSliderValue, text: $blueTextField, color: .blue)
-                
                 Spacer()
             }
             .padding()
         }
+    }
+    
+    private func checkInputData() {
+        guard let _ = Double(redTextField) else { alertPresenter = true; return }
+        UIApplication.shared.endEditing()
     }
 }
 
@@ -57,16 +65,20 @@ struct SliderView: View {
             TextField("\(lround(value))", text: $text)
                 .frame(width: 45)
                 .textFieldStyle(.roundedBorder)
+                .keyboardType(.decimalPad)
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button("Done") {
+                            UIApplication.shared.endEditing()
+                        }
+                    }
+                }
         }
     }
 }
-
-extension Color {
-    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
-        var r: CGFloat = 0
-        var g: CGFloat = 0
-        var b: CGFloat = 0
-        var o: CGFloat = 1
-        return (r, g, b, o)
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
+
