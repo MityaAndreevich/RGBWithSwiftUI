@@ -17,8 +17,6 @@ struct ContentView: View {
     @State private var blueSliderValue = Double.random(in: 0...255)
     @State private var blueTextField = ""
     
-    //@State private var viewColor = Color.red
-    
     @State private var alertPresenter = false
     
     var body: some View {
@@ -33,7 +31,7 @@ struct ContentView: View {
                         blue: blueSliderValue / 255
                     ))
                     .frame(width: 250, height: 150)
-                    .overlay(Rectangle().stroke(.red, lineWidth: 3))
+                    .overlay(Rectangle().stroke(.white, lineWidth: 3))
                 SliderView(value: $redSliderValue, text: $redTextField, tint: .red)
                 SliderView(value: $greenSliderValue, text: $greenTextField, tint: .green)
                 SliderView(value: $blueSliderValue, text: $blueTextField, tint: .blue)
@@ -71,13 +69,17 @@ struct SliderView: View {
                 .textFieldStyle(.roundedBorder)
                 .keyboardType(.decimalPad)
                 .toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
+                    ToolbarItemGroup(placement: .keyboard) {
                         Button("Done") {
+                            setValuesFromText()
                             UIApplication.shared.endEditing()
                         }
                     }
                 }
         }
+    }
+    private func setValuesFromText() {
+        value = Double(text) ?? 0
     }
 }
 extension UIApplication {
