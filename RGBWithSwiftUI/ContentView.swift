@@ -27,12 +27,16 @@ struct ContentView: View {
                 .ignoresSafeArea()
             VStack(spacing: 30) {
                 Rectangle()
-                    .foregroundColor(Color(red: (redSliderValue / 255), green: greenSliderValue / 255, blue: blueSliderValue / 255, opacity: 1))
+                    .foregroundColor(Color(
+                        red: redSliderValue / 255,
+                        green: greenSliderValue / 255,
+                        blue: blueSliderValue / 255
+                    ))
                     .frame(width: 250, height: 150)
                     .overlay(Rectangle().stroke(.red, lineWidth: 3))
-                SliderView(value: $redSliderValue, text: $redTextField, color: .red)
-                SliderView(value: $greenSliderValue, text: $greenTextField, color: .green)
-                SliderView(value: $blueSliderValue, text: $blueTextField, color: .blue)
+                SliderView(value: $redSliderValue, text: $redTextField, tint: .red)
+                SliderView(value: $greenSliderValue, text: $greenTextField, tint: .green)
+                SliderView(value: $blueSliderValue, text: $blueTextField, tint: .blue)
                 Spacer()
             }
             .padding()
@@ -54,14 +58,14 @@ struct ContentView_Previews: PreviewProvider {
 struct SliderView: View {
     @Binding var value: Double
     @Binding var text: String
-    let color: Color
+    let tint: Color
     
     var body: some View {
         HStack {
             Text("\(lround(value))")
-                .foregroundColor(color)
                 .frame(width: 45)
             Slider(value: $value, in: 0...255, step: 1)
+                .tint(tint)
             TextField("\(lround(value))", text: $text)
                 .frame(width: 45)
                 .textFieldStyle(.roundedBorder)
