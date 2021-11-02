@@ -17,7 +17,9 @@ struct ContentView: View {
     @State private var blueSliderValue = Double.random(in: 0...255)
     @State private var blueTextField = ""
     
-    //@State private var alertPresenter = false
+    @State private var alertPresenter = false
+    
+    @FocusState private var isInputActive: Bool
     
     var body: some View {
         ZStack {
@@ -32,8 +34,29 @@ struct ContentView: View {
                     .frame(width: 250, height: 150)
                     .overlay(Rectangle().stroke(.white, lineWidth: 3))
                 SliderView(value: $redSliderValue, text: $redTextField, tint: .red)
+                    .keyboardType(.decimalPad)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Button("Done", action: setValuesFromTextRed)
+                                .alert("Wrong Input", isPresented: $alertPresenter, actions: {})
+                        }
+                    }
                 SliderView(value: $greenSliderValue, text: $greenTextField, tint: .green)
+                    .keyboardType(.decimalPad)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Button("Done", action: setValuesFromTextGreen)
+                                .alert("Wrong Input", isPresented: $alertPresenter, actions: {})
+                        }
+                    }
                 SliderView(value: $blueSliderValue, text: $blueTextField, tint: .blue)
+                    .keyboardType(.decimalPad)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Button("Done", action: setValuesFromTextBlue)
+                                .alert("Wrong Input", isPresented: $alertPresenter, actions: {})
+                        }
+                    }
                 Spacer()
             }
             .padding()
@@ -62,21 +85,7 @@ struct SliderView: View {
             TextField("\(lround(value))", text: $text)
                 .frame(width: 45)
                 .textFieldStyle(.roundedBorder)
-                .keyboardType(.decimalPad)
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Button("Done", action: setValuesFromText)
-                            .alert("Wrong Input", isPresented: $alertPresenter, actions: {})
-                    }
-                }
-        }
-    }
-    private func setValuesFromText() {
-        if value >= 0 && value <= 255 {
-            value = Double(text) ?? 0
-            UIApplication.shared.endEditing()
-        } else {
-            alertPresenter.toggle()
+                //.keyboardType(.decimalPad)
         }
     }
 }
@@ -88,4 +97,31 @@ extension UIApplication {
     }
 }
 
-
+extension ContentView {
+    func setValuesFromTextRed() {
+        if redSliderValue >= 0 && redSliderValue <= 255 {
+            redSliderValue = Double(redTextField) ?? 0
+            UIApplication.shared.endEditing()
+        } else {
+            alertPresenter.toggle()
+        }
+    }
+    
+    func setValuesFromTextGreen() {
+        if greenSliderValue >= 0 && greenSliderValue <= 255 {
+            greenSliderValue = Double(greenTextField) ?? 0
+            UIApplication.shared.endEditing()
+        } else {
+            alertPresenter.toggle()
+        }
+    }
+    
+    func setValuesFromTextBlue() {
+        if blueSliderValue >= 0 && blueSliderValue <= 255 {
+            blueSliderValue = Double(blueTextField) ?? 0
+            UIApplication.shared.endEditing()
+        } else {
+            alertPresenter.toggle()
+        }
+    }
+}
