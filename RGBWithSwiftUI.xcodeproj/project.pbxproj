@@ -64,12 +64,12 @@
 				5FD1B0DF272C2076000A92EA /* RGBWithSwiftUIApp.swift */,
 				5FD1B0E1272C2076000A92EA /* ContentView.swift */,
 				5FD1B0EF2731CADD000A92EA /* ColorView.swift */,
+				5FD1B0F72732F0C5000A92EA /* AllColorSetterStack.swift */,
 				5FD1B0F52731CC0E000A92EA /* ColorValueTextView.swift */,
 				5FD1B0F12731CB1B000A92EA /* SliderView.swift */,
 				5FD1B0F32731CB2D000A92EA /* ColorTFView.swift */,
 				5FD1B0E3272C2078000A92EA /* Assets.xcassets */,
 				5FD1B0E5272C2078000A92EA /* Preview Content */,
-				5FD1B0F72732F0C5000A92EA /* AllColorSetterStack.swift */,
 			);
 			path = RGBWithSwiftUI;
 			sourceTree = "<group>";

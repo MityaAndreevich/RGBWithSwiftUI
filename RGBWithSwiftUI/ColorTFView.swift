@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct ColorTFView: View {
-    @State private var alertPresenter = false
     
     @Binding var value: Double
     @Binding var textValue: String
     
+    @State private var alertPresenter = false
+    
+    
     var body: some View {
         TextField("", text: $textValue) { _ in
             checkValue()
-            
         }
-            .frame(width: 45)
-            .textFieldStyle(.roundedBorder)
-            .keyboardType(.decimalPad)
-            .alert("Wrong Format!", isPresented: $alertPresenter, actions: {}) {
-                Text("Please, enter value from 0 to 255.")
-            }
+        .frame(width: 45)
+        .textFieldStyle(.roundedBorder)
+        .keyboardType(.decimalPad)
+        .alert("Wrong Format!", isPresented: $alertPresenter, actions: {}) {
+            Text("Please, enter value from 0 to 255.")
+        }
     }
 }
 

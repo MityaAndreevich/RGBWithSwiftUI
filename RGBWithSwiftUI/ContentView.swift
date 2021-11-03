@@ -8,16 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var redSliderValue = Double.random(in: 0...255)
-    @State private var redTextField = ""
     
-    @State private var greenSliderValue = Double.random(in: 0...255)
-    @State private var greenTextField = ""
-    
-    @State private var blueSliderValue = Double.random(in: 0...255)
-    @State private var blueTextField = ""
-    
-    @State private var alertPresenter = false
+    @State private var redValue = Double.random(in: 0...255)
+    @State private var greenValue = Double.random(in: 0...255)
+    @State private var blueValue = Double.random(in: 0...255)
     
     @FocusState private var isInputActive: Bool
     
@@ -26,10 +20,22 @@ struct ContentView: View {
             Color.gray
                 .ignoresSafeArea()
             VStack(spacing: 25) {
-                ColorView(red: redSliderValue, green: greenSliderValue, blue: blueSliderValue)
-                AllColorSetterStack(sliderValue: $redSliderValue, tintColor: .red)
-                AllColorSetterStack(sliderValue: $greenSliderValue, tintColor: .green)
-                AllColorSetterStack(sliderValue: $blueSliderValue, tintColor: .blue)
+                ColorView(red: redValue, green: greenValue, blue: blueValue)
+                
+                VStack(spacing: 30) {
+                    AllColorSetterStack(sliderValue: $redValue, tintColor: .red)
+                    AllColorSetterStack(sliderValue: $greenValue, tintColor: .green)
+                    AllColorSetterStack(sliderValue: $blueValue, tintColor: .blue)
+                }
+                .focused($isInputActive)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") {
+                            isInputActive = false
+                        }
+                    }
+                }
                 Spacer()
             }
             .padding()
@@ -44,10 +50,5 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
 
 
