@@ -27,22 +27,9 @@ struct ContentView: View {
                 .ignoresSafeArea()
             VStack(spacing: 25) {
                 ColorView(red: redSliderValue, green: greenSliderValue, blue: blueSliderValue)
-                HStack {
-                    ColorValueTextView(value: redSliderValue)
-                    SliderView(sliderValue: $redSliderValue, tint: .red)
-                    ColorTFView(value: $redSliderValue, textValue: $redTextField)
-                }
-                HStack {
-                    ColorValueTextView(value: greenSliderValue)
-                    SliderView(sliderValue: $greenSliderValue, tint: .green)
-                    ColorTFView(value: $greenSliderValue, textValue: $greenTextField)
-                }
-                HStack {
-                    ColorValueTextView(value: blueSliderValue)
-                    SliderView(sliderValue: $blueSliderValue, tint: .blue)
-                    ColorTFView(value: $blueSliderValue, textValue: $blueTextField)
-                }
-                
+                AllColorSetterStack(sliderValue: $redSliderValue, tintColor: .red)
+                AllColorSetterStack(sliderValue: $greenSliderValue, tintColor: .green)
+                AllColorSetterStack(sliderValue: $blueSliderValue, tintColor: .blue)
                 Spacer()
             }
             .padding()
