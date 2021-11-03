@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct SliderView: View {
+    
+    @Binding var sliderValue: Double
+    //@State private var textVlue = ""
+    
+    let tint: Color
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Slider(value: $sliderValue, in: 0...255, step: 1)
+            .tint(tint)
     }
 }
 
 struct SliderView_Previews: PreviewProvider {
     static var previews: some View {
-        SliderView()
+        SliderView(sliderValue: .constant(120), tint: .red)
     }
 }

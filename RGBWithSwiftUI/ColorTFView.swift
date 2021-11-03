@@ -8,13 +8,42 @@
 import SwiftUI
 
 struct ColorTFView: View {
+    @State private var alertPresenter = false
+    
+    @Binding var value: Double
+    @Binding var textValue: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TextField("", text: $textValue) { _ in
+            checkValue()
+            
+        }
+            .frame(width: 45)
+            .textFieldStyle(.roundedBorder)
+            .keyboardType(.decimalPad)
+            .alert("Wrong Format!", isPresented: $alertPresenter, actions: {}) {
+                Text("Please, enter value from 0 to 255.")
+            }
+    }
+}
+
+extension ColorTFView {
+    private func checkValue() {
+        if let value = Int(textValue), (0...255).contains(value) {
+            self.value = Double(value)
+            return
+        }
+        alertPresenter.toggle()
+        value = 0
+        textValue = "0"
     }
 }
 
 struct TextField_Previews: PreviewProvider {
     static var previews: some View {
-        ColorTFView()
+        ZStack {
+            Color.gray
+            ColorTFView(value: .constant(120), textValue: .constant("120"))
+        }
     }
 }
