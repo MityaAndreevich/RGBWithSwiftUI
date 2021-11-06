@@ -21,7 +21,6 @@ struct ContentView: View {
                 .ignoresSafeArea()
             VStack(spacing: 25) {
                 ColorView(red: redValue, green: greenValue, blue: blueValue)
-                
                 VStack(spacing: 30) {
                     AllColorSetterStack(sliderValue: $redValue, tintColor: .red)
                     AllColorSetterStack(sliderValue: $greenValue, tintColor: .green)
@@ -39,6 +38,9 @@ struct ContentView: View {
                 Spacer()
             }
             .padding()
+        }
+        .onTapGesture {
+            isInputActive = false
         }
     }
 }

@@ -14,7 +14,6 @@ struct ColorTFView: View {
     
     @State private var alertPresenter = false
     
-    
     var body: some View {
         TextField("", text: $textValue) { _ in
             checkValue()

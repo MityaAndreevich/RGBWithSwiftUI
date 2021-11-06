@@ -42,6 +42,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F6FFAB02736A5980093F0C0 /* ColorSetterViews */ = {
+			isa = PBXGroup;
+			children = (
+				5FD1B0F72732F0C5000A92EA /* AllColorSetterStack.swift */,
+				5FD1B0F52731CC0E000A92EA /* ColorValueTextView.swift */,
+				5FD1B0F12731CB1B000A92EA /* SliderView.swift */,
+				5FD1B0F32731CB2D000A92EA /* ColorTFView.swift */,
+			);
+			path = ColorSetterViews;
+			sourceTree = "<group>";
+		};
 		5FD1B0D3272C2076000A92EA = {
 			isa = PBXGroup;
 			children = (
@@ -64,10 +75,7 @@
 				5FD1B0DF272C2076000A92EA /* RGBWithSwiftUIApp.swift */,
 				5FD1B0E1272C2076000A92EA /* ContentView.swift */,
 				5FD1B0EF2731CADD000A92EA /* ColorView.swift */,
-				5FD1B0F72732F0C5000A92EA /* AllColorSetterStack.swift */,
-				5FD1B0F52731CC0E000A92EA /* ColorValueTextView.swift */,
-				5FD1B0F12731CB1B000A92EA /* SliderView.swift */,
-				5FD1B0F32731CB2D000A92EA /* ColorTFView.swift */,
+				5F6FFAB02736A5980093F0C0 /* ColorSetterViews */,
 				5FD1B0E3272C2078000A92EA /* Assets.xcassets */,
 				5FD1B0E5272C2078000A92EA /* Preview Content */,
 			);
